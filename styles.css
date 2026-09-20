@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ticTacToe {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.ticTacToeButton {
+    width: 75px;
+    height: 75px;
+    background-color: white;
+    border: 3px solid black;
+}
+
+.ticTacToeButton:hover {
+    background-color: rgb(219, 218, 218);
+    transition-duration: 125ms;
+}
