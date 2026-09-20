@@ -4,12 +4,24 @@ const ticTacToe = document.querySelector('.ticTacToe');
 const ticTacToeButtons = document.querySelectorAll('.ticTacToeButton');
 
 const markAsX = (button) => {
-    if(button.classList.contains('markedO') || button.classList.contains('markedX')) return;
     button.style.backgroundImage = 'url(./images/x.svg)';
     button.style.backgroundSize = 'cover';
     button.style.backgroundPosition = 'center';
     button.style.backgroundColor = 'rgb(201, 53, 49)';
     button.classList.add('markedX');
+}
+
+const checkIfAllButtonsMarked = () => {
+    let counter = 0;
+    ticTacToeButtons.forEach(button => {
+        if(button.classList.contains('markedX') || button.classList.contains('markedO')) counter++;
+    })
+    if(!checkWin() && counter === 9) {
+        const winH1 = document.createElement('h1');
+        winH1.textContent = "Draw!";
+        container.append(winH1);
+        return true;
+    }
 }
 
 const botMarkAsO = () => {
@@ -35,6 +47,8 @@ const checkWin = () => {
 
 ticTacToeButtons.forEach(button => {
     button.addEventListener('click', () => {
+        if (button.classList.contains('markedO') || button.classList.contains('markedX')) return;
+        if (checkIfAllButtonsMarked()) return;
         markAsX(button);
         if(checkWin()) {
             const winH1 = document.createElement('h1');
@@ -42,6 +56,7 @@ ticTacToeButtons.forEach(button => {
             container.append(winH1);
             return;
         }
+        if (checkIfAllButtonsMarked()) return;
         botMarkAsO();
         if(checkWin()) {
             const winH1 = document.createElement('h1');
