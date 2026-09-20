@@ -3,7 +3,17 @@ const container = document.querySelector('.container');
 const ticTacToe = document.querySelector('.ticTacToe');
 const ticTacToeButtons = document.querySelectorAll('.ticTacToeButton');
 
-const sleep = new Promise(e => setTimeout(e, ms));
+const sleep = (ms) => new Promise(e => setTimeout(e, ms));
+
+const resetBoard = () => {
+    ticTacToeButtons.forEach(button => {
+        button.classList.remove('markedX', 'markedO');
+        button.style.backgroundImage = '';
+        button.style.backgroundColor = 'white';
+    });
+    const winH1 = container.querySelector('h1');
+    if (winH1) winH1.remove();
+}
 
 const markAsX = (button) => {
     button.style.backgroundImage = 'url(./images/x.svg)';
@@ -17,28 +27,8 @@ const checkIfAllButtonsMarked = () => {
     let counter = 0;
     ticTacToeButtons.forEach(button => {
         if(button.classList.contains('markedX') || button.classList.contains('markedO')) counter++;
-    })
-    if(!checkWin() && counter === 9) {
-        const winH1 = document.createElement('h1');
-        winH1.textContent = "Draw!";
-        container.append(winH1);
-        sleep(5000);
-        for(let i=0; i<9; i++){
-            ticTacToeButtons.forEach(button => {
-                if(button.classList.contains('markedX')) {
-                    button.classList.remove('markedX');
-                    button.style.backgroundImage = '';
-                    button.style.backgroundColor = 'white'
-                }
-                if(button.classList.contains('markedO')) {
-                    button.classList.remove('markedO');
-                    button.style.backgroundImage = '';
-                    button.style.backgroundColor = 'white'
-                }
-            });
-        }
-        return true;
-    }
+    });
+    return counter === 9;
 }
 
 const botMarkAsO = () => {
@@ -63,53 +53,33 @@ const checkWin = () => {
 };
 
 ticTacToeButtons.forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
         if (button.classList.contains('markedO') || button.classList.contains('markedX')) return;
-        if (checkIfAllButtonsMarked()) return;
         markAsX(button);
         if(checkWin()) {
             const winH1 = document.createElement('h1');
             winH1.textContent = "You have won!";
             container.append(winH1);
-            sleep(5000);
-            for(let i=0; i<9; i++){
-                ticTacToeButtons.forEach(button => {
-                    if(button.classList.contains('markedX')) {
-                        button.classList.remove('markedX');
-                        button.style.backgroundImage = '';
-                        button.style.backgroundColor = 'white'
-                    }
-                    if(button.classList.contains('markedO')) {
-                        button.classList.remove('markedO');
-                        button.style.backgroundImage = '';
-                        button.style.backgroundColor = 'white'
-                    }
-                });
-            }
+            await sleep(5000);
+            resetBoard();
             return;
         }
-        if (checkIfAllButtonsMarked()) return;
+        if (checkIfAllButtonsMarked()) {
+            const winH1 = document.createElement('h1');
+            winH1.textContent = "Draw!";
+            container.append(winH1);
+            await sleep(5000);
+            resetBoard();
+            return;
+        }
         botMarkAsO();
         if(checkWin()) {
             const winH1 = document.createElement('h1');
             winH1.textContent = "Bot has won!";
             container.append(winH1);
-            sleep(5000);
-            for(let i=0; i<9; i++){
-            ticTacToeButtons.forEach(button => {
-                if(button.classList.contains('markedX')) {
-                    button.classList.remove('markedX');
-                    button.style.backgroundImage = '';
-                    button.style.backgroundColor = 'white'
-                }
-                if(button.classList.contains('markedO')) {
-                    button.classList.remove('markedO');
-                    button.style.backgroundImage = '';
-                    button.style.backgroundColor = 'white'
-                }
-            });
-        }
-        return;
-        }
+            await sleep(5000);
+            resetBoard();
+            return;
+        };
     });
 });
