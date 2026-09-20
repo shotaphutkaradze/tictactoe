@@ -36,5 +36,5 @@ body {
 
 .ticTacToeButton:hover {
     background-color: rgb(219, 218, 218);
-    transition-duration: 125ms;
+    transition-duration: 62.5ms;
 }
