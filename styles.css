@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -8,6 +9,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    font-size: 25px;
 }
 
 .ticTacToe {

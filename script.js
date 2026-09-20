@@ -1,4 +1,5 @@
 const body = document.body;
+const container = document.querySelector('.container');
 const ticTacToe = document.querySelector('.ticTacToe');
 const ticTacToeButtons = document.querySelectorAll('.ticTacToeButton');
 
@@ -20,6 +21,7 @@ const botMarkAsO = () => {
     randomButton.style.backgroundImage = 'url(./images/o.webp)';
     randomButton.style.backgroundSize = 'cover';
     randomButton.style.backgroundPosition = 'center'
+    randomButton.style.backgroundColor = 'rgb(227, 58, 53)'
     randomButton.classList.add('markedO');
     console.log(x);
 }
@@ -34,8 +36,18 @@ const checkWin = () => {
 ticTacToeButtons.forEach(button => {
     button.addEventListener('click', () => {
         markAsX(button);
-        if(checkWin()) return console.log('Player wins!');
+        if(checkWin()) {
+            const winH1 = document.createElement('h1');
+            winH1.textContent = "You have won!";
+            container.append(winH1);
+            return;
+        }
         botMarkAsO();
-        if(checkWin()) return console.log('Computer wins!');
+        if(checkWin()) {
+            const winH1 = document.createElement('h1');
+            winH1.textContent = "Bot has won!";
+            container.append(winH1);
+            return;
+        }
     });
 });
