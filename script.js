@@ -25,8 +25,16 @@ const checkIfAllButtonsMarked = () => {
         sleep(5000);
         for(let i=0; i<9; i++){
             ticTacToeButtons.forEach(button => {
-                if(button.classList.contains('markedX')) button.classList.remove('markedX');
-                if(button.classList.contains('markedO')) button.classList.remove('markedO');
+                if(button.classList.contains('markedX')) {
+                    button.classList.remove('markedX');
+                    button.style.backgroundImage = '';
+                    button.style.backgroundColor = 'white'
+                }
+                if(button.classList.contains('markedO')) {
+                    button.classList.remove('markedO');
+                    button.style.backgroundImage = '';
+                    button.style.backgroundColor = 'white'
+                }
             });
         }
         return true;
@@ -66,8 +74,16 @@ ticTacToeButtons.forEach(button => {
             sleep(5000);
             for(let i=0; i<9; i++){
                 ticTacToeButtons.forEach(button => {
-                    if(button.classList.contains('markedX')) button.classList.remove('markedX');
-                    if(button.classList.contains('markedO')) button.classList.remove('markedO');
+                    if(button.classList.contains('markedX')) {
+                        button.classList.remove('markedX');
+                        button.style.backgroundImage = '';
+                        button.style.backgroundColor = 'white'
+                    }
+                    if(button.classList.contains('markedO')) {
+                        button.classList.remove('markedO');
+                        button.style.backgroundImage = '';
+                        button.style.backgroundColor = 'white'
+                    }
                 });
             }
             return;
@@ -80,12 +96,20 @@ ticTacToeButtons.forEach(button => {
             container.append(winH1);
             sleep(5000);
             for(let i=0; i<9; i++){
-                ticTacToeButtons.forEach(button => {
-                    if(button.classList.contains('markedX')) button.classList.remove('markedX');
-                    if(button.classList.contains('markedO')) button.classList.remove('markedO');
-                });
-            }
-            return;
+            ticTacToeButtons.forEach(button => {
+                if(button.classList.contains('markedX')) {
+                    button.classList.remove('markedX');
+                    button.style.backgroundImage = '';
+                    button.style.backgroundColor = 'white'
+                }
+                if(button.classList.contains('markedO')) {
+                    button.classList.remove('markedO');
+                    button.style.backgroundImage = '';
+                    button.style.backgroundColor = 'white'
+                }
+            });
+        }
+        return;
         }
     });
 });
