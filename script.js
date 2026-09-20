@@ -3,6 +3,8 @@ const container = document.querySelector('.container');
 const ticTacToe = document.querySelector('.ticTacToe');
 const ticTacToeButtons = document.querySelectorAll('.ticTacToeButton');
 
+const sleep = new Promise(e => setTimeout(e, ms));
+
 const markAsX = (button) => {
     button.style.backgroundImage = 'url(./images/x.svg)';
     button.style.backgroundSize = 'cover';
@@ -20,6 +22,13 @@ const checkIfAllButtonsMarked = () => {
         const winH1 = document.createElement('h1');
         winH1.textContent = "Draw!";
         container.append(winH1);
+        sleep(5000);
+        for(let i=0; i<9; i++){
+            ticTacToeButtons.forEach(button => {
+                if(button.classList.contains('markedX')) button.classList.remove('markedX');
+                if(button.classList.contains('markedO')) button.classList.remove('markedO');
+            });
+        }
         return true;
     }
 }
@@ -54,6 +63,13 @@ ticTacToeButtons.forEach(button => {
             const winH1 = document.createElement('h1');
             winH1.textContent = "You have won!";
             container.append(winH1);
+            sleep(5000);
+            for(let i=0; i<9; i++){
+                ticTacToeButtons.forEach(button => {
+                    if(button.classList.contains('markedX')) button.classList.remove('markedX');
+                    if(button.classList.contains('markedO')) button.classList.remove('markedO');
+                });
+            }
             return;
         }
         if (checkIfAllButtonsMarked()) return;
@@ -62,6 +78,13 @@ ticTacToeButtons.forEach(button => {
             const winH1 = document.createElement('h1');
             winH1.textContent = "Bot has won!";
             container.append(winH1);
+            sleep(5000);
+            for(let i=0; i<9; i++){
+                ticTacToeButtons.forEach(button => {
+                    if(button.classList.contains('markedX')) button.classList.remove('markedX');
+                    if(button.classList.contains('markedO')) button.classList.remove('markedO');
+                });
+            }
             return;
         }
     });
