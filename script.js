@@ -68,7 +68,7 @@ ticTacToeButtons.forEach(button => {
             const winH1 = document.createElement('h1');
             winH1.textContent = "Draw!";
             container.append(winH1);
-            await sleep(5000);
+            await sleep(2500);
             resetBoard();
             return;
         }
